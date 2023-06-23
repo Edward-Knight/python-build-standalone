@@ -1,8 +1,6 @@
 on:
   push:
   pull_request:
-  schedule:
-    - cron: '13 11 * * *'
 jobs:
   pythonbuild:
     runs-on: ubuntu-22.04
