@@ -30,6 +30,11 @@ if [ "${CC}" = "musl-clang" ]; then
     EXTRA_FLAGS="${EXTRA_FLAGS} no-async -DOPENSSL_NO_ASYNC -D__STDC_NO_ATOMICS__=1 no-engine -DOPENSSL_NO_SECURE_MEMORY"
 fi
 
+# -latomic is required for certain targets
+if [ "${OPENSSL_TARGET}" = "linux-mips32" ] || [ "${OPENSSL_TARGET}" = "linux-x86-clang" ]; then
+    EXTRA_FLAGS="${EXTRA_FLAGS} -latomic"
+fi
+
 # The -arch cflags confuse Configure. And OpenSSL adds them anyway.
 # Strip them.
 EXTRA_TARGET_CFLAGS=${EXTRA_TARGET_CFLAGS/\-arch arm64/}
