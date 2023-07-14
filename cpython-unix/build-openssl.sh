@@ -32,7 +32,7 @@ fi
 
 # -latomic is required for certain targets
 if [ "${OPENSSL_TARGET}" = "linux-mips32" ] || [ "${OPENSSL_TARGET}" = "linux-x86-clang" ]; then
-    EXTRA_FLAGS="${EXTRA_FLAGS} -latomic"
+    EXTRA_FLAGS="${EXTRA_FLAGS} -l:libatomic.a"
 fi
 
 # The -arch cflags confuse Configure. And OpenSSL adds them anyway.

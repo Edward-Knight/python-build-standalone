@@ -300,10 +300,10 @@ fi
 
 # OpenSSL 3.0 uses atomic operations
 # This requires linking with libatomic for targets without hardware support
-# On Linux, the -latomic flag is required when using clang, and for some gcc targets
+# On Linux, the flag is required when using clang, and for some gcc targets
 if [ "${PYBUILD_PLATFORM}" != "macos" ]; then
     if [[ ${CC} =~ clang ]] || [[ ${TARGET_TRIPLE} =~ mips ]]; then
-        LDFLAGS="${LDFLAGS} -latomic"
+        LDFLAGS="${LDFLAGS} -l:libatomic.a"
     fi
 fi
 
