@@ -86,6 +86,7 @@ class ContainerContext(object):
         if isinstance(program, str) and not program.startswith("/"):
             program = "/build/%s" % program
 
+        log(f"running {program=} in {self.container=} with {user=}, {environment=}")
         container_exec(self.container, program, user=user, environment=environment)
 
     def get_tools_archive(self, dest, name):
@@ -252,6 +253,7 @@ def build_environment(client, image):
             image, command=["/bin/sleep", "86400"], detach=True
         )
         td = None
+        log(f"created {container=} with {client=}, {image=}")
         context = ContainerContext(container)
     else:
         container = None

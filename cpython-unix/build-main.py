@@ -12,6 +12,7 @@ import subprocess
 import sys
 
 from pythonbuild.downloads import DOWNLOADS
+from pythonbuild.logging import log
 from pythonbuild.utils import (
     compress_python_archive,
     get_target_settings,
@@ -152,8 +153,10 @@ def main():
     # a long, serial dependency chain that can't be built in parallel.
     parallelism = min(1 if args.serial else 4, multiprocessing.cpu_count())
 
+    make_cmd = ["make", "-j%d" % parallelism, args.make_target]
+    log(f"running {make_cmd=} with {env=}")
     subprocess.run(
-        ["make", "-j%d" % parallelism, args.make_target], env=env, check=True
+        make_cmd, env=env, check=True
     )
 
     DIST.mkdir(exist_ok=True)
