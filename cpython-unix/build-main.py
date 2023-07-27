@@ -153,6 +153,9 @@ def main():
     # a long, serial dependency chain that can't be built in parallel.
     parallelism = min(1 if args.serial else 4, multiprocessing.cpu_count())
 
+    # debug
+    parallelism = 1
+
     make_cmd = ["make", "-j%d" % parallelism, args.make_target]
     log(f"running {make_cmd=} with {env=}")
     subprocess.run(

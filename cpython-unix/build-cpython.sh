@@ -482,6 +482,11 @@ CFLAGS=$CFLAGS CPPFLAGS=$CFLAGS LDFLAGS=$LDFLAGS \
 # Supplement produced Makefile with our modifications.
 cat ../Makefile.extra >> Makefile
 
+echo "Makefile:"
+cat Makefile
+
+echo "Main cpython build:"
+NUM_CPUS=1
 make -j ${NUM_CPUS}
 make -j ${NUM_CPUS} install DESTDIR=${ROOT}/out/python
 
